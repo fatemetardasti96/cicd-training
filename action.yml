@@ -8,7 +8,7 @@ inputs:
 outputs:
   num_sqr:
     description: 'squared of the input'
-    value: ${{ step.get-squared.outputs.num_sqr }}
+    value: ${{ step.get_squared.outputs.num_sqr }}
 run:
   using: 'composite'
   steps:
@@ -24,6 +24,6 @@ run:
               echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
       shell: bash
     - name: Number Squared
-      id: get-squared
+      id: get_squared
       run: python src/get_num_square.py
       shell: bash
