@@ -1,0 +1,17 @@
+name: Test Action
+on: [push]
+
+jobs:
+  get-num-sqr:
+    runs-on: ubuntu-latest
+    name: return the squared number
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Number Squared
+        id: get-squared
+        uses: ./
+        with:
+          num: 11
+        - name: print the squared
+          run: echo "${{ steps.get-squared.outputs.num_squared }}"

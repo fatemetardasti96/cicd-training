@@ -1,0 +1,29 @@
+name: 'Fateme Github Action'
+description: 'my first action for training'
+inputs:
+  num:
+    description: 'Enter a number'
+    required: true
+    default: "1"
+outputs:
+  num_sqr:
+    description: 'squared of the input'
+    value: ${{ step.get-squared.outputs.num_sqr }}
+run:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+    - name: Pass Input to Shell
+      run: |
+              echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
+      shell: bash
+    - name: Number Squared
+      id: get-squared
+      run: python src/get_num_square.py
+      shell: bash
